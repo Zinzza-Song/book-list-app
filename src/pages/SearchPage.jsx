@@ -3,30 +3,13 @@ import BookSearchForm from '@/components/BookSearchForm'
 import BooksList from '@/components/BooksList'
 import React, { useState } from 'react'
 import axios from 'axios'
-import Loader from '../components/Loader'
-
-const LogoText = newStyled.h3`
-  margin: 0;
-`
-
-const Container = newStyled.div`
-  max-width: 960px;
-  padding: 15px;
-  margin: 0 auto;
-`
-
-const Header = newStyled.header`
-  border-bottom: 1px solid gray;
-`
-
-const HeaderContainer = newStyled(Container)`
-  display: flex;
-  align-items: center;
-  @media (max-width: 778px) {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-`
+import Loader from '@/components/Loader'
+import {
+  Container,
+  Header,
+  HeaderContainer,
+  LogoText
+} from '@/components/Shared'
 
 const HeaderSearchForm = newStyled.div`
   margin-left: auto;

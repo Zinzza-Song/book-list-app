@@ -4,7 +4,7 @@ import { css, Global, ThemeProvider, useTheme } from '@emotion/react'
 import SearchPage from '@/pages/SearchPage'
 import BookDetailPage from '@/pages/BookDetailPage'
 import Footer from '@/components/Footer'
-import { themeDark, themeLight } from '@/libs/Theme'
+import { themeDark, themeLight } from '@/components/Theme'
 
 function App() {
   const [isDark, setIsDark] = useState(false)

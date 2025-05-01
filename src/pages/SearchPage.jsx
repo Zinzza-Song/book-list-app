@@ -1,7 +1,9 @@
 import newStyled from '@emotion/styled'
 import BookSearchForm from '@/components/BookSearchForm'
+import BooksList from '@/components/BooksList'
 import React, { useState } from 'react'
 import axios from 'axios'
+import Loader from '../components/Loader'
 
 const LogoText = newStyled.h3`
   margin: 0;
@@ -40,12 +42,16 @@ const SearchPage = () => {
   const fetchBooks = async () => {
     setLoading(true)
 
+    if (books != {}) setBooks({})
+
     try {
       const res = await axios.get(`${API_BASE_URL}/v1/volumes?q=${searchTerm}`)
       setBooks(res.data)
     } catch (err) {
       console.log(err)
     }
+
+    setLoading(false)
   }
 
   const handleChange = e => {
@@ -71,6 +77,13 @@ const SearchPage = () => {
           </HeaderSearchForm>
         </HeaderContainer>
       </Header>
+
+      <Container>
+        <Loader loading={loading}>
+          "<strong>{searchTerm}</strong>" 책을 찾고 있습니다.
+        </Loader>
+        <BooksList books={books} />
+      </Container>
     </>
   )
 }

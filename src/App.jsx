@@ -11,7 +11,7 @@ function App() {
 
   const Layout = ({ isDark, setIsDark }) => {
     const theme = useTheme()
-    console.log(theme)
+
     return (
       <div>
         <Global

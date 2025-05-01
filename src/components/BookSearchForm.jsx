@@ -36,12 +36,14 @@ const Form = newStyled.form`
 
 `
 
-const BookSearchForm = () => {
+const BookSearchForm = ({ onChange, onSubmit, searchTerm }) => {
   return (
-    <Form>
+    <Form onSubmit={onSubmit}>
       <Input
         type="search"
         placeholder="책 이름을 검색해주세요."
+        onChange={onChange}
+        value={searchTerm}
       />
 
       <Button type="submit">Search</Button>

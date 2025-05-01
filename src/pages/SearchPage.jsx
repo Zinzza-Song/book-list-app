@@ -1,6 +1,7 @@
 import newStyled from '@emotion/styled'
 import BookSearchForm from '@/components/BookSearchForm'
-import React from 'react'
+import React, { useState } from 'react'
+import axios from 'axios'
 
 const LogoText = newStyled.h3`
   margin: 0;
@@ -30,13 +31,43 @@ const HeaderSearchForm = newStyled.div`
 `
 
 const SearchPage = () => {
+  const [searchTerm, setSearchTerm] = useState('')
+  const [books, setBooks] = useState({})
+  const [loading, setLoading] = useState(false)
+
+  const API_BASE_URL = `https://www.googleapis.com/books`
+
+  const fetchBooks = async () => {
+    setLoading(true)
+
+    try {
+      const res = await axios.get(`${API_BASE_URL}/v1/volumes?q=${searchTerm}`)
+      setBooks(res.data)
+    } catch (err) {
+      console.log(err)
+    }
+  }
+
+  const handleChange = e => {
+    setSearchTerm(e.target.value)
+  }
+
+  const handleSubmit = e => {
+    e.preventDefault()
+    fetchBooks()
+  }
+
   return (
     <>
       <Header>
         <HeaderContainer>
           <LogoText>Book List</LogoText>
           <HeaderSearchForm>
-            <BookSearchForm />
+            <BookSearchForm
+              onChange={handleChange}
+              onSubmit={handleSubmit}
+              searchTerm={searchTerm}
+            />
           </HeaderSearchForm>
         </HeaderContainer>
       </Header>
